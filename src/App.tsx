@@ -21,8 +21,10 @@ import { MultiSelect } from '../components/ui/multiselect'
 import { FileUploader } from '../components/ui/file-uploader'
 import { Autocomplete } from '../components/ui/autocomplete'
 import { Combobox } from '../components/ui/combobox'
+import { useToastAPI } from '../components/ui/toast-context'
 
 function App() {
+  const toast = useToastAPI()
   const [dialogOpen, setDialogOpen] = useState(false)
   const [inputValue, setInputValue] = useState('')
   const [loading, setLoading] = useState(false)
@@ -101,6 +103,7 @@ function App() {
                   <a href="#popovers" className="block text-ink-gray-7 hover:text-ink-gray-9">Popovers</a>
                   <a href="#tooltips" className="block text-ink-gray-7 hover:text-ink-gray-9">Tooltips</a>
                   <a href="#spinners" className="block text-ink-gray-7 hover:text-ink-gray-9">Spinners</a>
+                  <a href="#toasts" className="block text-ink-gray-7 hover:text-ink-gray-9">Toasts</a>
                   <a href="#badges" className="block text-ink-gray-7 hover:text-ink-gray-9">Badges</a>
                   <a href="#cards" className="block text-ink-gray-7 hover:text-ink-gray-9">Cards</a>
                   <a href="#avatars" className="block text-ink-gray-7 hover:text-ink-gray-9">Avatars</a>
@@ -1151,6 +1154,103 @@ function App() {
               <div className="flex gap-4">
                 <Button loading>Loading Button</Button>
                 <Button variant="outline" loading>Loading</Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Toast Examples */}
+        <section id="toasts" className="space-y-6 scroll-mt-24">
+          <div>
+            <h2 className="text-2xl font-semibold text-ink-gray-9 mb-2">Toasts</h2>
+            <p className="text-p-sm text-ink-gray-6 mb-4">
+              Toast notifications for user feedback
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Types</h3>
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  onClick={() => toast.success('Operation completed successfully!')}
+                  className="min-w-[120px]"
+                >
+                  Success
+                </Button>
+                <Button
+                  onClick={() => toast.error('Something went wrong!')}
+                  className="min-w-[120px]"
+                >
+                  Error
+                </Button>
+                <Button
+                  onClick={() => toast.warning('Please review this action')}
+                  className="min-w-[120px]"
+                >
+                  Warning
+                </Button>
+                <Button
+                  onClick={() => toast.info('Here is some information')}
+                  className="min-w-[120px]"
+                >
+                  Info
+                </Button>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">With Actions</h3>
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  onClick={() =>
+                    toast.create({
+                      message: 'File uploaded successfully',
+                      type: 'success',
+                      action: {
+                        label: 'Undo',
+                        onClick: () => toast.info('Action undone'),
+                      },
+                    })
+                  }
+                  className="min-w-[120px]"
+                >
+                  With Action
+                </Button>
+                <Button
+                  onClick={() =>
+                    toast.create({
+                      message: 'This toast cannot be closed',
+                      type: 'info',
+                      closable: false,
+                      duration: 0,
+                    })
+                  }
+                  className="min-w-[120px]"
+                >
+                  Non-closable
+                </Button>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Promise Toast</h3>
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  onClick={async () => {
+                    await toast.promise(
+                      new Promise((resolve) => setTimeout(resolve, 2000)),
+                      {
+                        loading: 'Processing...',
+                        success: 'Task completed!',
+                        error: 'Task failed!',
+                      }
+                    )
+                  }}
+                  className="min-w-[120px]"
+                >
+                  Promise Toast
+                </Button>
               </div>
             </div>
           </div>
