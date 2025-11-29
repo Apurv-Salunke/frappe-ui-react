@@ -23,6 +23,8 @@ import { Autocomplete } from '../components/ui/autocomplete'
 import { Combobox } from '../components/ui/combobox'
 import { useToastAPI } from '../components/ui/toast-context'
 import { DatePicker } from '../components/ui/date-picker'
+import { Tabs } from '../components/ui/tabs'
+import { FeatherIcon } from '../components/ui/feather-icon'
 
 function App() {
   const toast = useToastAPI()
@@ -35,6 +37,7 @@ function App() {
   const [comboboxValue, setComboboxValue] = useState<string | null>(null)
   const [multiSelectValue, setMultiSelectValue] = useState<string[]>([])
   const [dateValue, setDateValue] = useState<string>('')
+  const [tabIndex, setTabIndex] = useState(0)
 
   const handleAutocompleteMultipleChange = (value: any) => {
     setAutocompleteMultipleValue(Array.isArray(value) ? value : [])
@@ -107,6 +110,7 @@ function App() {
                   <a href="#spinners" className="block text-ink-gray-7 hover:text-ink-gray-9">Spinners</a>
                   <a href="#toasts" className="block text-ink-gray-7 hover:text-ink-gray-9">Toasts</a>
                   <a href="#datepicker" className="block text-ink-gray-7 hover:text-ink-gray-9">DatePicker</a>
+                  <a href="#tabs" className="block text-ink-gray-7 hover:text-ink-gray-9">Tabs</a>
                   <a href="#badges" className="block text-ink-gray-7 hover:text-ink-gray-9">Badges</a>
                   <a href="#cards" className="block text-ink-gray-7 hover:text-ink-gray-9">Cards</a>
                   <a href="#avatars" className="block text-ink-gray-7 hover:text-ink-gray-9">Avatars</a>
@@ -1336,6 +1340,114 @@ function App() {
                 <div className="w-64">
                   <DatePicker label="Birth Date" placeholder="Select date" />
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Tabs Examples */}
+        <section id="tabs" className="space-y-6 scroll-mt-24">
+          <div>
+            <h2 className="text-2xl font-semibold text-ink-gray-9 mb-2">Tabs</h2>
+            <p className="text-p-sm text-ink-gray-6 mb-4">
+              Tab navigation with animated indicator
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Horizontal Tabs</h3>
+              <div className="border rounded">
+                <Tabs
+                  as="div"
+                  tabs={[
+                    {
+                      label: 'Github',
+                      content:
+                        'Github is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.',
+                    },
+                    {
+                      label: 'Twitter',
+                      content:
+                        'Twitter is an American microblogging and social networking service on which users post and interact with messages known as "tweets".',
+                    },
+                    {
+                      label: 'Linkedin',
+                      content:
+                        'LinkedIn is an American business and employment-oriented online service that operates via websites and mobile apps.',
+                    },
+                  ]}
+                  selectedIndex={tabIndex}
+                  onIndexChange={setTabIndex}
+                  renderTabPanel={({ tab }) => (
+                    <div className="p-5">{tab.content}</div>
+                  )}
+                />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Tabs with Icons</h3>
+              <div className="border rounded">
+                <Tabs
+                  as="div"
+                  tabs={[
+                    {
+                      label: 'Github',
+                      icon: () => <FeatherIcon name="github" className="w-4 h-4" />,
+                      content:
+                        'Github is a code hosting platform for version control and collaboration.',
+                    },
+                    {
+                      label: 'Twitter',
+                      icon: () => <FeatherIcon name="twitter" className="w-4 h-4" />,
+                      content:
+                        'Twitter is an American microblogging and social networking service.',
+                    },
+                    {
+                      label: 'Linkedin',
+                      icon: () => <FeatherIcon name="linkedin" className="w-4 h-4" />,
+                      content:
+                        'LinkedIn is an American business and employment-oriented online service.',
+                    },
+                  ]}
+                  renderTabPanel={({ tab }) => (
+                    <div className="p-5">{tab.content}</div>
+                  )}
+                />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Vertical Tabs</h3>
+              <div className="border rounded" style={{ height: '300px' }}>
+                <Tabs
+                  as="div"
+                  vertical
+                  tabs={[
+                    {
+                      label: 'Github',
+                      icon: () => <FeatherIcon name="github" className="w-4 h-4" />,
+                      content:
+                        'Github is a code hosting platform for version control and collaboration.',
+                    },
+                    {
+                      label: 'Twitter',
+                      icon: () => <FeatherIcon name="twitter" className="w-4 h-4" />,
+                      content:
+                        'Twitter is an American microblogging and social networking service.',
+                    },
+                    {
+                      label: 'Linkedin',
+                      icon: () => <FeatherIcon name="linkedin" className="w-4 h-4" />,
+                      content:
+                        'LinkedIn is an American business and employment-oriented online service.',
+                    },
+                  ]}
+                  renderTabPanel={({ tab }) => (
+                    <div className="p-5">{tab.content}</div>
+                  )}
+                />
               </div>
             </div>
           </div>
