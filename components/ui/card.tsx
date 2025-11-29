@@ -26,25 +26,23 @@ export function Card({
       'flex flex-col rounded-lg border bg-white px-6 py-5 shadow',
       className
     )}>
-      {(title || actions || actionsLeft) && (
-        <div className="flex items-baseline justify-between">
-          <div className="flex items-baseline space-x-2">
-            {actionsLeft && (
-              <div className="flex items-center space-x-2">
-                {actionsLeft}
-              </div>
-            )}
-            {title && (
-              <h2 className="text-xl font-semibold">{title}</h2>
-            )}
-          </div>
-          {actions && (
+      <div className="flex items-baseline justify-between">
+        <div className="flex items-baseline space-x-2">
+          {actionsLeft && (
             <div className="flex items-center space-x-2">
-              {actions}
+              {actionsLeft}
             </div>
           )}
+          {title && (
+            <h2 className="text-xl font-semibold">{title}</h2>
+          )}
         </div>
-      )}
+        {actions && (
+          <div className="flex items-center space-x-2">
+            {actions}
+          </div>
+        )}
+      </div>
       {subtitle && (
         <p className="mt-1.5 text-base text-gray-600">
           {subtitle}
@@ -57,13 +55,11 @@ export function Card({
             <span>Loading...</span>
           </div>
         </div>
-      ) : (
-        children && (
-          <div className="mt-4 flex-auto overflow-auto">
-            {children}
-          </div>
-        )
-      )}
+      ) : children ? (
+        <div className="mt-4 flex-auto overflow-auto">
+          {children}
+        </div>
+      ) : null}
     </div>
   )
 }
