@@ -1,4 +1,3 @@
-import React from 'react'
 import feather from 'feather-icons'
 import { cn } from '../../lib/utils'
 
@@ -17,11 +16,11 @@ export function FeatherIcon({
   color, 
   strokeWidth = 1.5 
 }: FeatherIconProps) {
-  let icon = feather.icons[name]
+  let icon = (feather.icons as Record<string, any>)[name]
   
   if (!icon) {
     console.warn(`[frappe-ui-react] Invalid icon name: ${name}`)
-    icon = feather.icons['circle']
+    icon = (feather.icons as Record<string, any>)['circle']
   }
 
   const iconAttrs = icon.attrs || {}

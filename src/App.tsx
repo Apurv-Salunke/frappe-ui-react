@@ -2,6 +2,10 @@ import { useState } from 'react'
 import { Button } from '../components/ui/button'
 import { Input } from '../components/ui/input'
 import { Dialog } from '../components/ui/dialog'
+import { Badge } from '../components/ui/badge'
+import { Card } from '../components/ui/card'
+import { Divider } from '../components/ui/divider'
+import { Avatar } from '../components/ui/avatar'
 
 function App() {
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -251,6 +255,181 @@ function App() {
               ],
             }}
           />
+        </section>
+
+        {/* Badge Examples */}
+        <section className="space-y-6">
+          <div>
+            <h2 className="text-2xl font-semibold text-ink-gray-9 mb-2">Badges</h2>
+            <p className="text-p-sm text-ink-gray-6 mb-4">
+              Status indicators with multiple variants and themes
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Variants (Gray Theme)</h3>
+              <div className="flex flex-wrap gap-4 items-center">
+                <Badge theme="gray" variant="solid" size="md">Solid</Badge>
+                <Badge theme="gray" variant="subtle" size="md">Subtle</Badge>
+                <Badge theme="gray" variant="outline" size="md">Outline</Badge>
+                <Badge theme="gray" variant="ghost" size="md">Ghost</Badge>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Sizes</h3>
+              <div className="flex flex-wrap gap-4 items-center">
+                <Badge theme="gray" variant="subtle" size="sm">Small</Badge>
+                <Badge theme="gray" variant="subtle" size="md">Medium</Badge>
+                <Badge theme="gray" variant="subtle" size="lg">Large</Badge>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">With Numbers</h3>
+              <div className="flex flex-wrap gap-4 items-center">
+                <Badge theme="gray" variant="subtle" size="md">5</Badge>
+                <Badge theme="gray" variant="subtle" size="md">12</Badge>
+                <Badge theme="gray" variant="subtle" size="md">99+</Badge>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Avatar Examples */}
+        <section className="space-y-6">
+          <div>
+            <h2 className="text-2xl font-semibold text-ink-gray-9 mb-2">Avatars</h2>
+            <p className="text-p-sm text-ink-gray-6 mb-4">
+              User profile images with fallback to initials
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Sizes</h3>
+              <div className="flex flex-wrap gap-4 items-center">
+                <Avatar label="JD" size="xs" />
+                <Avatar label="JD" size="sm" />
+                <Avatar label="JD" size="md" />
+                <Avatar label="JD" size="lg" />
+                <Avatar label="JD" size="xl" />
+                <Avatar label="JD" size="2xl" />
+                <Avatar label="JD" size="3xl" />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Shapes</h3>
+              <div className="flex flex-wrap gap-4 items-center">
+                <Avatar label="JD" size="md" shape="circle" />
+                <Avatar label="JD" size="md" shape="square" />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">With Indicator</h3>
+              <div className="flex flex-wrap gap-4 items-center">
+                <Avatar 
+                  label="JD" 
+                  size="md" 
+                  indicator={<div className="h-full w-full rounded-full bg-green-500" />}
+                />
+                <Avatar 
+                  label="AB" 
+                  size="lg" 
+                  indicator={<div className="h-full w-full rounded-full bg-red-500" />}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Card Examples */}
+        <section className="space-y-6">
+          <div>
+            <h2 className="text-2xl font-semibold text-ink-gray-9 mb-2">Cards</h2>
+            <p className="text-p-sm text-ink-gray-6 mb-4">
+              Container components for grouping content
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card
+              title="Basic Card"
+              subtitle="This is a subtitle"
+            >
+              <p className="text-p-sm text-ink-gray-7">
+                This is the card content. You can put any content here.
+              </p>
+            </Card>
+
+            <Card
+              title="Card with Actions"
+              subtitle="Actions on the right"
+              actions={
+                <Button theme="gray" variant="ghost" size="sm">
+                  Action
+                </Button>
+              }
+            >
+              <p className="text-p-sm text-ink-gray-7">
+                This card has action buttons in the header.
+              </p>
+            </Card>
+
+            <Card
+              title="Loading Card"
+              loading={true}
+            />
+
+            <Card
+              title="Card with Badge"
+              actionsLeft={
+                <Badge theme="gray" variant="subtle" size="sm">New</Badge>
+              }
+            >
+              <p className="text-p-sm text-ink-gray-7">
+                Cards can have badges or other elements in the header.
+              </p>
+            </Card>
+          </div>
+        </section>
+
+        {/* Divider Examples */}
+        <section className="space-y-6">
+          <div>
+            <h2 className="text-2xl font-semibold text-ink-gray-9 mb-2">Dividers</h2>
+            <p className="text-p-sm text-ink-gray-6 mb-4">
+              Separators with optional action buttons
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Horizontal</h3>
+              <div className="space-y-4">
+                <div>
+                  <p className="text-p-sm text-ink-gray-7 mb-2">Above content</p>
+                  <Divider />
+                  <p className="text-p-sm text-ink-gray-7 mt-2">Below content</p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">With Action</h3>
+              <div className="space-y-4">
+                <Divider
+                  action={{
+                    label: 'Show More',
+                    handler: () => console.log('Show more clicked'),
+                  }}
+                />
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Comparison Note */}

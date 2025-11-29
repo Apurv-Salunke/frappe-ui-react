@@ -14,7 +14,7 @@ export type TextInputTypes =
 export type InputSize = 'sm' | 'md' | 'lg' | 'xl'
 export type InputVariant = 'subtle' | 'outline' | 'ghost'
 
-export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix' | 'suffix' | 'onChange'> {
   type?: TextInputTypes
   size?: InputSize
   variant?: InputVariant
@@ -146,10 +146,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       (e: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = e.target.value
         debouncedEmitChange(newValue)
-        // Also call native onChange if provided
-        props.onChange?.(e)
       },
-      [debouncedEmitChange, props]
+      [debouncedEmitChange]
     )
 
     return (
@@ -179,7 +177,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           defaultValue={defaultValue}
           required={required}
           onChange={handleChange}
-          {...props}
+          {...(props as Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>)}
         />
         {suffix && (
           <div
