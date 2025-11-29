@@ -25,6 +25,8 @@ import { useToastAPI } from '../components/ui/toast-context'
 import { DatePicker } from '../components/ui/date-picker'
 import { Tabs } from '../components/ui/tabs'
 import { FeatherIcon } from '../components/ui/feather-icon'
+import { FormControl } from '../components/ui/form-control'
+import { FormLabel } from '../components/ui/form-label'
 
 function App() {
   const toast = useToastAPI()
@@ -111,6 +113,7 @@ function App() {
                   <a href="#toasts" className="block text-ink-gray-7 hover:text-ink-gray-9">Toasts</a>
                   <a href="#datepicker" className="block text-ink-gray-7 hover:text-ink-gray-9">DatePicker</a>
                   <a href="#tabs" className="block text-ink-gray-7 hover:text-ink-gray-9">Tabs</a>
+                  <a href="#form-control" className="block text-ink-gray-7 hover:text-ink-gray-9">FormControl</a>
                   <a href="#badges" className="block text-ink-gray-7 hover:text-ink-gray-9">Badges</a>
                   <a href="#cards" className="block text-ink-gray-7 hover:text-ink-gray-9">Cards</a>
                   <a href="#avatars" className="block text-ink-gray-7 hover:text-ink-gray-9">Avatars</a>
@@ -1448,6 +1451,119 @@ function App() {
                     <div className="p-5">{tab.content}</div>
                   )}
                 />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FormControl Examples */}
+        <section id="form-control" className="space-y-6 scroll-mt-24">
+          <div>
+            <h2 className="text-2xl font-semibold text-ink-gray-9 mb-2">FormControl & FormLabel</h2>
+            <p className="text-p-sm text-ink-gray-6 mb-4">
+              Form wrapper components with label and description
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Text Input</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-64">
+                  <FormControl
+                    label="Name"
+                    type="text"
+                    placeholder="Enter your name"
+                  />
+                </div>
+                <div className="w-64">
+                  <FormControl
+                    label="Email"
+                    type="email"
+                    placeholder="Enter your email"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">With Description</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-64">
+                  <FormControl
+                    label="Username"
+                    description="Choose a unique username"
+                    type="text"
+                    placeholder="username"
+                  />
+                </div>
+                <div className="w-64">
+                  <FormControl
+                    label="Password"
+                    description="Must be at least 8 characters"
+                    type="password"
+                    placeholder="Enter password"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Textarea</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-96">
+                  <FormControl
+                    label="Message"
+                    description="Enter your message here"
+                    type="textarea"
+                    placeholder="Type your message..."
+                    rows={4}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Select</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-64">
+                  <FormControl
+                    label="Country"
+                    type="select"
+                    options={[
+                      { label: 'United States', value: 'us' },
+                      { label: 'Canada', value: 'ca' },
+                      { label: 'United Kingdom', value: 'uk' },
+                    ]}
+                    placeholder="Select country"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Checkbox</h3>
+              <div className="flex flex-wrap gap-4">
+                <FormControl
+                  label="I agree to the terms and conditions"
+                  type="checkbox"
+                />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Standalone FormLabel</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-64">
+                  <FormLabel label="Standalone Label" size="sm" />
+                  <Input placeholder="Input with standalone label" />
+                </div>
+                <div className="w-64">
+                  <FormLabel label="Required Label" size="md" required />
+                  <Input placeholder="Input with required label" />
+                </div>
               </div>
             </div>
           </div>

@@ -53,9 +53,44 @@ export const Password = React.forwardRef<HTMLInputElement, PasswordProps>(
       [props]
     )
 
-    const toggleShow = useCallback(() => {
+
+    const handleToggle = useCallback((e: React.MouseEvent) => {
+      e.preventDefault()
+      e.stopPropagation()
       setShow((prev) => !prev)
     }, [])
+
+    const iconElement = showEye ? (
+      <div className="h-3 cursor-pointer mr-1 flex items-center justify-center">
+        <Tooltip
+          content={
+            <div className="flex items-center gap-1">
+              <span>{show ? 'Hide Password' : 'Show Password'}</span>
+              <kbd className="bg-surface-gray-5 text-ink-gray-2 px-1 rounded text-xs">
+                Mod+I
+              </kbd>
+            </div>
+          }
+        >
+          <button
+            type="button"
+            onClick={handleToggle}
+            onMouseDown={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+            }}
+            className="flex items-center justify-center"
+            aria-label={show ? 'Hide password' : 'Show password'}
+          >
+            <FeatherIcon 
+              key={show ? 'eye-off' : 'eye'}
+              name={show ? 'eye-off' : 'eye'} 
+              className="h-3 w-3"
+            />
+          </button>
+        </Tooltip>
+      </div>
+    ) : undefined
 
     return (
       <Input
@@ -65,31 +100,7 @@ export const Password = React.forwardRef<HTMLInputElement, PasswordProps>(
         defaultValue={defaultValue}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        suffix={
-          showEye ? (
-            <Tooltip
-              content={
-                <div className="flex items-center gap-1">
-                  <span>{show ? 'Hide Password' : 'Show Password'}</span>
-                  <kbd className="bg-surface-gray-5 text-ink-gray-2 px-1 rounded text-xs">
-                    Mod+I
-                  </kbd>
-                </div>
-              }
-            >
-              <button
-                type="button"
-                onClick={toggleShow}
-                className="h-3 cursor-pointer mr-1 flex items-center"
-              >
-                <FeatherIcon
-                  name={show ? 'eye-off' : 'eye'}
-                  className="h-3 w-3"
-                />
-              </button>
-            </Tooltip>
-          ) : undefined
-        }
+        suffix={iconElement}
         className={className}
         {...props}
       />
