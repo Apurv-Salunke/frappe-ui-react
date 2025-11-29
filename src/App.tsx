@@ -27,6 +27,7 @@ import { Tabs } from '../components/ui/tabs'
 import { FeatherIcon } from '../components/ui/feather-icon'
 import { FormControl } from '../components/ui/form-control'
 import { FormLabel } from '../components/ui/form-label'
+import { Breadcrumbs } from '../components/ui/breadcrumbs'
 
 function App() {
   const toast = useToastAPI()
@@ -114,6 +115,7 @@ function App() {
                   <a href="#datepicker" className="block text-ink-gray-7 hover:text-ink-gray-9">DatePicker</a>
                   <a href="#tabs" className="block text-ink-gray-7 hover:text-ink-gray-9">Tabs</a>
                   <a href="#form-control" className="block text-ink-gray-7 hover:text-ink-gray-9">FormControl</a>
+                  <a href="#breadcrumbs" className="block text-ink-gray-7 hover:text-ink-gray-9">Breadcrumbs</a>
                   <a href="#badges" className="block text-ink-gray-7 hover:text-ink-gray-9">Badges</a>
                   <a href="#cards" className="block text-ink-gray-7 hover:text-ink-gray-9">Cards</a>
                   <a href="#avatars" className="block text-ink-gray-7 hover:text-ink-gray-9">Avatars</a>
@@ -1563,6 +1565,86 @@ function App() {
                 <div className="w-64">
                   <FormLabel label="Required Label" size="md" required />
                   <Input placeholder="Input with required label" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Breadcrumbs */}
+        <section id="breadcrumbs" className="space-y-6 scroll-mt-24">
+          <div>
+            <h2 className="text-2xl font-bold text-ink-gray-9 mb-2">Breadcrumbs</h2>
+            <p className="text-p-base text-ink-gray-7 mb-6">
+              Navigation breadcrumb trail with overflow handling
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Basic Breadcrumbs</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-full max-w-2xl">
+                  <Breadcrumbs
+                    items={[
+                      { label: 'Home', route: '/', onClick: () => console.log('Home clicked') },
+                      { label: 'Products', route: '/products', onClick: () => console.log('Products clicked') },
+                      { label: 'Electronics', route: '/products/electronics' },
+                      { label: 'Laptops' },
+                    ]}
+                    onNavigate={(route) => console.log('Navigate to:', route)}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Breadcrumbs with Icons</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-full max-w-2xl">
+                  <Breadcrumbs
+                    items={[
+                      { label: 'Home', route: '/' },
+                      { label: 'Settings', route: '/settings' },
+                      { label: 'Account' },
+                    ]}
+                    renderPrefix={() => (
+                      <FeatherIcon name="home" className="w-4 h-4 mr-1" />
+                    )}
+                    onNavigate={(route) => console.log('Navigate to:', route)}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Breadcrumbs with Click Handlers</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-full max-w-2xl">
+                  <Breadcrumbs
+                    items={[
+                      { label: 'Dashboard', onClick: () => toast.info('Dashboard clicked') },
+                      { label: 'Projects', onClick: () => toast.info('Projects clicked') },
+                      { label: 'Project Alpha', onClick: () => toast.info('Project Alpha clicked') },
+                    ]}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Long Breadcrumbs (Overflow Test)</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-96 border border-outline-gray-2 p-4 rounded">
+                  <Breadcrumbs
+                    items={[
+                      { label: 'Home', route: '/' },
+                      { label: 'Very Long Category Name', route: '/category' },
+                      { label: 'Another Long Subcategory', route: '/category/sub' },
+                      { label: 'Product Name' },
+                    ]}
+                    onNavigate={(route) => console.log('Navigate to:', route)}
+                  />
                 </div>
               </div>
             </div>
