@@ -7,6 +7,7 @@ import { Textarea } from './textarea'
 import { Select } from './select'
 import { Checkbox } from './checkbox'
 import { Autocomplete } from './autocomplete'
+import { ErrorMessage } from './error-message'
 
 export type FormControlType =
   | 'text'
@@ -35,6 +36,7 @@ export interface FormControlProps
   descriptionSlot?: ReactNode
   rows?: number
   options?: Array<{ label: string; value: string; disabled?: boolean }> | string[]
+  error?: string | Error
 }
 
 export function FormControl({
@@ -52,6 +54,7 @@ export function FormControl({
   style,
   id: providedId,
   onChange,
+  error,
   ...props
 }: FormControlProps & { onChange?: (value: string) => void }) {
   const generatedId = useId()
@@ -116,6 +119,7 @@ export function FormControl({
       {descriptionSlot || (description && (
         <p className={descriptionClasses}>{description}</p>
       ))}
+      {error && <ErrorMessage message={error} />}
       {children}
     </div>
   )

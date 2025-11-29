@@ -28,6 +28,8 @@ import { FeatherIcon } from '../components/ui/feather-icon'
 import { FormControl } from '../components/ui/form-control'
 import { FormLabel } from '../components/ui/form-label'
 import { Breadcrumbs } from '../components/ui/breadcrumbs'
+import { Rating } from '../components/ui/rating'
+import { ErrorMessage } from '../components/ui/error-message'
 
 function App() {
   const toast = useToastAPI()
@@ -41,6 +43,7 @@ function App() {
   const [multiSelectValue, setMultiSelectValue] = useState<string[]>([])
   const [dateValue, setDateValue] = useState<string>('')
   const [tabIndex, setTabIndex] = useState(0)
+  const [ratingValue, setRatingValue] = useState<number>(0)
 
   const handleAutocompleteMultipleChange = (value: any) => {
     setAutocompleteMultipleValue(Array.isArray(value) ? value : [])
@@ -116,6 +119,8 @@ function App() {
                   <a href="#tabs" className="block text-ink-gray-7 hover:text-ink-gray-9">Tabs</a>
                   <a href="#form-control" className="block text-ink-gray-7 hover:text-ink-gray-9">FormControl</a>
                   <a href="#breadcrumbs" className="block text-ink-gray-7 hover:text-ink-gray-9">Breadcrumbs</a>
+                  <a href="#rating" className="block text-ink-gray-7 hover:text-ink-gray-9">Rating</a>
+                  <a href="#error-message" className="block text-ink-gray-7 hover:text-ink-gray-9">ErrorMessage</a>
                   <a href="#badges" className="block text-ink-gray-7 hover:text-ink-gray-9">Badges</a>
                   <a href="#cards" className="block text-ink-gray-7 hover:text-ink-gray-9">Cards</a>
                   <a href="#avatars" className="block text-ink-gray-7 hover:text-ink-gray-9">Avatars</a>
@@ -1645,6 +1650,149 @@ function App() {
                     ]}
                     onNavigate={(route) => console.log('Navigate to:', route)}
                   />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Rating */}
+        <section id="rating" className="space-y-6 scroll-mt-24">
+          <div>
+            <h2 className="text-2xl font-bold text-ink-gray-9 mb-2">Rating</h2>
+            <p className="text-p-base text-ink-gray-7 mb-6">
+              Star rating input with hover effects and click to rate
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Basic Rating</h3>
+              <div className="flex flex-wrap gap-4">
+                <Rating
+                  value={ratingValue}
+                  onChange={setRatingValue}
+                  label="Rate this product"
+                />
+              </div>
+              {ratingValue > 0 && (
+                <p className="mt-2 text-sm text-ink-gray-7">Current rating: {ratingValue}/5</p>
+              )}
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Different Sizes</h3>
+              <div className="flex flex-wrap gap-6 items-end">
+                <Rating size="sm" defaultValue={3} label="Small" />
+                <Rating size="md" defaultValue={3} label="Medium" />
+                <Rating size="lg" defaultValue={3} label="Large" />
+                <Rating size="xl" defaultValue={3} label="Extra Large" />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Readonly Rating</h3>
+              <div className="flex flex-wrap gap-4">
+                <Rating defaultValue={4} readonly label="Readonly (4 stars)" />
+                <Rating defaultValue={2.5} readonly label="Readonly (2.5 stars)" />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Custom Rating Range</h3>
+              <div className="flex flex-wrap gap-4">
+                <Rating ratingFrom={3} defaultValue={2} label="3-star scale" />
+                <Rating ratingFrom={10} defaultValue={7} label="10-star scale" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ErrorMessage */}
+        <section id="error-message" className="space-y-6 scroll-mt-24">
+          <div>
+            <h2 className="text-2xl font-bold text-ink-gray-9 mb-2">ErrorMessage</h2>
+            <p className="text-p-base text-ink-gray-7 mb-6">
+              Form validation error display component
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Basic Error Message</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-full max-w-md">
+                  <ErrorMessage message="This field is required" />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Error from Error Object</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-full max-w-md">
+                  <ErrorMessage message={new Error('Invalid email address')} />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Multi-line Error Message</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-full max-w-md">
+                  <ErrorMessage message="Password must be at least 8 characters long.\nPassword must contain at least one uppercase letter.\nPassword must contain at least one number." />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Error with FormControl</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-64">
+                  <FormControl
+                    label="Email"
+                    type="email"
+                    placeholder="Enter your email"
+                    required
+                    error="Please enter a valid email address"
+                  />
+                </div>
+                <div className="w-64">
+                  <FormControl
+                    label="Password"
+                    type="password"
+                    placeholder="Enter password"
+                    required
+                    error="Password must be at least 8 characters"
+                  />
+                </div>
+                <div className="w-64">
+                  <FormControl
+                    label="Username"
+                    type="text"
+                    placeholder="Enter username"
+                    required
+                    error={new Error('Username is already taken')}
+                  />
+                </div>
+                <div className="w-64">
+                  <FormControl
+                    label="Phone"
+                    type="tel"
+                    placeholder="Enter phone number"
+                    description="Include country code"
+                    error="Invalid phone number format"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">No Error (Hidden)</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-full max-w-md">
+                  <ErrorMessage message={undefined} />
+                  <p className="text-sm text-ink-gray-5 mt-2">(No error message displayed above)</p>
                 </div>
               </div>
             </div>
