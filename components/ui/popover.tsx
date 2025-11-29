@@ -124,10 +124,18 @@ export function Popover({
       }
 
       const target = event.target as Element
+      // Don't close if clicking inside the anchor (trigger) or popover content
       if (
         anchorRef.current &&
         (anchorRef.current.contains(target) || anchorRef.current === target)
       ) {
+        event.preventDefault()
+        return
+      }
+      
+      // Check if clicking inside the popover content
+      const contentElement = (event.currentTarget as Element)?.closest('[data-radix-portal]')
+      if (contentElement && contentElement.contains(target)) {
         event.preventDefault()
         return
       }
@@ -150,13 +158,19 @@ export function Popover({
   const hasTransition = transition === 'default'
 
   return (
-    <PopoverPrimitive.Root open={open} onOpenChange={setOpen}>
+    <PopoverPrimitive.Root open={open} onOpenChange={setOpen} modal={false}>
       <PopoverPrimitive.Trigger asChild>
         <div
           ref={anchorRef}
           className="flex"
           onMouseOver={handleMouseOver}
           onMouseLeave={handleMouseLeave}
+          onClick={(e) => {
+            // Prevent default toggle behavior if controlled
+            if (isControlled) {
+              e.preventDefault()
+            }
+          }}
         >
           {children}
         </div>

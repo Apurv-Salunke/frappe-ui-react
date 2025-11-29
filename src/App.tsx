@@ -22,6 +22,7 @@ import { FileUploader } from '../components/ui/file-uploader'
 import { Autocomplete } from '../components/ui/autocomplete'
 import { Combobox } from '../components/ui/combobox'
 import { useToastAPI } from '../components/ui/toast-context'
+import { DatePicker } from '../components/ui/date-picker'
 
 function App() {
   const toast = useToastAPI()
@@ -33,6 +34,7 @@ function App() {
   const [autocompleteMultipleValue, setAutocompleteMultipleValue] = useState<any[]>([])
   const [comboboxValue, setComboboxValue] = useState<string | null>(null)
   const [multiSelectValue, setMultiSelectValue] = useState<string[]>([])
+  const [dateValue, setDateValue] = useState<string>('')
 
   const handleAutocompleteMultipleChange = (value: any) => {
     setAutocompleteMultipleValue(Array.isArray(value) ? value : [])
@@ -104,6 +106,7 @@ function App() {
                   <a href="#tooltips" className="block text-ink-gray-7 hover:text-ink-gray-9">Tooltips</a>
                   <a href="#spinners" className="block text-ink-gray-7 hover:text-ink-gray-9">Spinners</a>
                   <a href="#toasts" className="block text-ink-gray-7 hover:text-ink-gray-9">Toasts</a>
+                  <a href="#datepicker" className="block text-ink-gray-7 hover:text-ink-gray-9">DatePicker</a>
                   <a href="#badges" className="block text-ink-gray-7 hover:text-ink-gray-9">Badges</a>
                   <a href="#cards" className="block text-ink-gray-7 hover:text-ink-gray-9">Cards</a>
                   <a href="#avatars" className="block text-ink-gray-7 hover:text-ink-gray-9">Avatars</a>
@@ -1251,6 +1254,88 @@ function App() {
                 >
                   Promise Toast
                 </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* DatePicker Examples */}
+        <section id="datepicker" className="space-y-6 scroll-mt-24">
+          <div>
+            <h2 className="text-2xl font-semibold text-ink-gray-9 mb-2">DatePicker</h2>
+            <p className="text-p-sm text-ink-gray-6 mb-4">
+              Date selection with calendar popup
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Basic</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-64">
+                  <DatePicker
+                    value={dateValue}
+                    onChange={(value) => setDateValue(value)}
+                    placeholder="Select date"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">With Format</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-64">
+                  <DatePicker
+                    format="DD/MM/YYYY"
+                    placeholder="DD/MM/YYYY"
+                  />
+                </div>
+                <div className="w-64">
+                  <DatePicker
+                    format="MMM DD, YYYY"
+                    placeholder="MMM DD, YYYY"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Variants</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-64">
+                  <DatePicker variant="subtle" placeholder="Subtle variant" />
+                </div>
+                <div className="w-64">
+                  <DatePicker variant="outline" placeholder="Outline variant" />
+                </div>
+                <div className="w-64">
+                  <DatePicker variant="ghost" placeholder="Ghost variant" />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">States</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-64">
+                  <DatePicker disabled placeholder="Disabled" />
+                </div>
+                <div className="w-64">
+                  <DatePicker readonly placeholder="Readonly" />
+                </div>
+                <div className="w-64">
+                  <DatePicker clearable={false} placeholder="Not clearable" />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">With Label</h3>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-64">
+                  <DatePicker label="Birth Date" placeholder="Select date" />
+                </div>
               </div>
             </div>
           </div>
