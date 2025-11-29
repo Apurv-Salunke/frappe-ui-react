@@ -31,6 +31,8 @@ import { Breadcrumbs } from '../components/ui/breadcrumbs'
 import { Rating } from '../components/ui/rating'
 import { ErrorMessage } from '../components/ui/error-message'
 import { CircularProgressBar } from '../components/ui/circular-progress-bar'
+import { LoadingText } from '../components/ui/loading-text'
+import { ListItem } from '../components/ui/list-item'
 
 function App() {
   const toast = useToastAPI()
@@ -123,6 +125,8 @@ function App() {
                   <a href="#rating" className="block text-ink-gray-7 hover:text-ink-gray-9">Rating</a>
                   <a href="#error-message" className="block text-ink-gray-7 hover:text-ink-gray-9">ErrorMessage</a>
                   <a href="#circular-progress-bar" className="block text-ink-gray-7 hover:text-ink-gray-9">CircularProgressBar</a>
+                  <a href="#loading-text" className="block text-ink-gray-7 hover:text-ink-gray-9">LoadingText</a>
+                  <a href="#list-item" className="block text-ink-gray-7 hover:text-ink-gray-9">ListItem</a>
                   <a href="#badges" className="block text-ink-gray-7 hover:text-ink-gray-9">Badges</a>
                   <a href="#cards" className="block text-ink-gray-7 hover:text-ink-gray-9">Cards</a>
                   <a href="#avatars" className="block text-ink-gray-7 hover:text-ink-gray-9">Avatars</a>
@@ -1874,6 +1878,109 @@ function App() {
                   step={3}
                   totalSteps={4}
                   theme={{ primary: '#f59e0b', secondary: '#fef3c7' }}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* LoadingText */}
+        <section id="loading-text" className="space-y-6 scroll-mt-24">
+          <div>
+            <h2 className="text-2xl font-bold text-ink-gray-9 mb-2">LoadingText</h2>
+            <p className="text-p-base text-ink-gray-7 mb-6">
+              Loading indicator with text message
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Basic LoadingText</h3>
+              <div className="flex flex-wrap gap-4">
+                <LoadingText />
+                <LoadingText text="Fetching data..." />
+                <LoadingText text="Processing request..." />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ListItem */}
+        <section id="list-item" className="space-y-6 scroll-mt-24">
+          <div>
+            <h2 className="text-2xl font-bold text-ink-gray-9 mb-2">ListItem</h2>
+            <p className="text-p-base text-ink-gray-7 mb-6">
+              List item component with title, subtitle, and actions
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Basic ListItem</h3>
+              <div className="flex flex-col gap-2 w-full max-w-2xl border border-outline-gray-2 rounded-lg p-4">
+                <ListItem title="Item Title" subtitle="Item description text" />
+                <ListItem title="Another Item" subtitle="With a longer description that might wrap to multiple lines" />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">ListItem with Actions</h3>
+              <div className="flex flex-col gap-2 w-full max-w-2xl border border-outline-gray-2 rounded-lg p-4">
+                <ListItem
+                  title="Item with Button"
+                  subtitle="This item has an action button"
+                  renderActions={() => (
+                    <Button size="sm" variant="outline">
+                      Action
+                    </Button>
+                  )}
+                />
+                <ListItem
+                  title="Item with Multiple Actions"
+                  subtitle="This item has multiple action buttons"
+                  renderActions={() => (
+                    <div className="flex gap-2">
+                      <Button size="sm" variant="ghost">
+                        Edit
+                      </Button>
+                      <Button size="sm" variant="ghost">
+                        Delete
+                      </Button>
+                    </div>
+                  )}
+                />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">ListItem with Custom Subtitle</h3>
+              <div className="flex flex-col gap-2 w-full max-w-2xl border border-outline-gray-2 rounded-lg p-4">
+                <ListItem
+                  title="Item with Custom Subtitle"
+                  renderSubtitle={() => (
+                    <div className="text-base text-gray-600">
+                      <span className="font-medium">Status:</span> Active
+                    </div>
+                  )}
+                />
+                <ListItem
+                  title="Item with Rich Subtitle"
+                  renderSubtitle={() => (
+                    <div className="text-base text-gray-600">
+                      <Badge theme="green">New</Badge>
+                      <span className="ml-2">Created 2 days ago</span>
+                    </div>
+                  )}
+                />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">ListItem with Multi-line Subtitle</h3>
+              <div className="flex flex-col gap-2 w-full max-w-2xl border border-outline-gray-2 rounded-lg p-4">
+                <ListItem
+                  title="Multi-line Subtitle"
+                  subtitle="First line of description\nSecond line of description\nThird line of description"
                 />
               </div>
             </div>
