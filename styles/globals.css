@@ -252,3 +252,41 @@
   animation: KSwipeOut 250ms cubic-bezier(0.26, 0.09, 0.58, 1) forwards;
 }
 
+/* CircularProgressBar styles - EXACT COPY from Vue version */
+.circular-progress-bar {
+  width: var(--size);
+  height: var(--size);
+}
+
+.circular-progress-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: conic-gradient(
+    var(--color-progress) var(--progress),
+    var(--color-remaining-circle) 0%
+  );
+  transition: --progress 500ms linear;
+  aspect-ratio: 1 / 1;
+  align-self: center;
+}
+
+.circular-progress-bar::after {
+  content: '';
+  position: absolute;
+  background: white;
+  border-radius: inherit;
+  z-index: 1;
+  width: calc(100% - var(--bar-width));
+  aspect-ratio: 1 / 1;
+}
+
+.circular-progress-bar.completed:not(.fillOuter)::after {
+  background: var(--color-complete);
+}
+
+.circular-progress-bar.completed.fillOuter::before {
+  background: var(--color-complete);
+}
+

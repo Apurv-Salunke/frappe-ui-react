@@ -30,6 +30,7 @@ import { FormLabel } from '../components/ui/form-label'
 import { Breadcrumbs } from '../components/ui/breadcrumbs'
 import { Rating } from '../components/ui/rating'
 import { ErrorMessage } from '../components/ui/error-message'
+import { CircularProgressBar } from '../components/ui/circular-progress-bar'
 
 function App() {
   const toast = useToastAPI()
@@ -121,6 +122,7 @@ function App() {
                   <a href="#breadcrumbs" className="block text-ink-gray-7 hover:text-ink-gray-9">Breadcrumbs</a>
                   <a href="#rating" className="block text-ink-gray-7 hover:text-ink-gray-9">Rating</a>
                   <a href="#error-message" className="block text-ink-gray-7 hover:text-ink-gray-9">ErrorMessage</a>
+                  <a href="#circular-progress-bar" className="block text-ink-gray-7 hover:text-ink-gray-9">CircularProgressBar</a>
                   <a href="#badges" className="block text-ink-gray-7 hover:text-ink-gray-9">Badges</a>
                   <a href="#cards" className="block text-ink-gray-7 hover:text-ink-gray-9">Cards</a>
                   <a href="#avatars" className="block text-ink-gray-7 hover:text-ink-gray-9">Avatars</a>
@@ -1794,6 +1796,85 @@ function App() {
                   <ErrorMessage message={undefined} />
                   <p className="text-sm text-ink-gray-5 mt-2">(No error message displayed above)</p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CircularProgressBar */}
+        <section id="circular-progress-bar" className="space-y-6 scroll-mt-24">
+          <div>
+            <h2 className="text-2xl font-bold text-ink-gray-9 mb-2">CircularProgressBar</h2>
+            <p className="text-p-base text-ink-gray-7 mb-6">
+              Circular progress indicator with themes, sizes, and completion states
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Basic Progress</h3>
+              <div className="flex flex-wrap gap-6 items-center">
+                <CircularProgressBar step={1} totalSteps={4} />
+                <CircularProgressBar step={2} totalSteps={4} />
+                <CircularProgressBar step={3} totalSteps={4} />
+                <CircularProgressBar step={4} totalSteps={4} />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">With Percentage</h3>
+              <div className="flex flex-wrap gap-6 items-center">
+                <CircularProgressBar step={1} totalSteps={4} showPercentage />
+                <CircularProgressBar step={2} totalSteps={4} showPercentage />
+                <CircularProgressBar step={3} totalSteps={4} showPercentage />
+                <CircularProgressBar step={4} totalSteps={4} showPercentage />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Different Sizes</h3>
+              <div className="flex flex-wrap gap-6 items-center">
+                <CircularProgressBar step={2} totalSteps={4} size="xs" />
+                <CircularProgressBar step={2} totalSteps={4} size="sm" />
+                <CircularProgressBar step={2} totalSteps={4} size="md" />
+                <CircularProgressBar step={2} totalSteps={4} size="lg" />
+                <CircularProgressBar step={2} totalSteps={4} size="xl" />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Different Themes</h3>
+              <div className="flex flex-wrap gap-6 items-center">
+                <CircularProgressBar step={2} totalSteps={4} theme="black" />
+                <CircularProgressBar step={2} totalSteps={4} theme="red" />
+                <CircularProgressBar step={2} totalSteps={4} theme="green" />
+                <CircularProgressBar step={2} totalSteps={4} theme="blue" />
+                <CircularProgressBar step={2} totalSteps={4} theme="orange" />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Outline Variant</h3>
+              <div className="flex flex-wrap gap-6 items-center">
+                <CircularProgressBar step={2} totalSteps={4} variant="outline" theme="green" />
+                <CircularProgressBar step={3} totalSteps={4} variant="outline" theme="blue" />
+                <CircularProgressBar step={4} totalSteps={4} variant="outline" theme="green" />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-medium text-ink-gray-8 mb-3">Custom Theme</h3>
+              <div className="flex flex-wrap gap-6 items-center">
+                <CircularProgressBar
+                  step={2}
+                  totalSteps={4}
+                  theme={{ primary: '#9333ea', secondary: '#e9d5ff' }}
+                />
+                <CircularProgressBar
+                  step={3}
+                  totalSteps={4}
+                  theme={{ primary: '#f59e0b', secondary: '#fef3c7' }}
+                />
               </div>
             </div>
           </div>
